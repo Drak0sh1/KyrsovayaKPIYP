@@ -1,0 +1,14 @@
+﻿<Window x:Class="Курсовая1._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая1._0"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FFA4A4A4">
+        <Label Content="Добро пожаловать!" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Unicode MS" FontWeight="Bold"/>
+        <Button x:Name="EnterBtn" Click="EnterBtn_Click" Content="Войти" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="224" FontSize="16" Height="47"/>
+        <PasswordBox Name="PasswordBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="429" Height="37" FontFamily="Arial" FontSize="18"/>
+    </Grid>
+</Window>

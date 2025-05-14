@@ -1,0 +1,35 @@
+﻿<Window x:Class="Курсовая1._0.SubjectPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая1._0"
+        mc:Ignorable="d"
+        Title="SubjectPage" Height="550" Width="900">
+    <Grid>
+        <Button Name="ExitBtn" Content="Вернуться на главную страницу" HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Click="ExitBtn_Click" Width="246" Height="32"/>
+        <DataGrid Name="SubjectGrid" AutoGenerateColumns="False" Margin="0,0,298,28" BorderBrush="Black">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название предмета" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Кол-во часов" IsReadOnly="True" Binding="{Binding Hours}"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Click="ChangeBtn_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить" Click="DeleteBtn_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="AddBtn" Content="Добавить" HorizontalAlignment="Left" Margin="630,60,0,0" VerticalAlignment="Top" Width="137" Height="32" Click="AddBtn_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище KBPClassBetaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Disciplines">
+    <Key>
+      <PropertyRef Name="IDDisciplines" />
+    </Key>
+    <Property Name="IDDisciplines" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDTeacher" Type="int" Nullable="false" />
+    <Property Name="Hours" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="IDTask" />
+    </Key>
+    <Property Name="IDTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IssuanceDate" Type="date" Nullable="false" />
+    <Property Name="DueDate" Type="date" Nullable="false" />
+    <Property Name="IDWorkPlan" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="IDTeacher" />
+    </Key>
+    <Property Name="IDTeacher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkPlans">
+    <Key>
+      <PropertyRef Name="IDWorkPlan" />
+    </Key>
+    <Property Name="IDWorkPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descriptions" Type="nchar" MaxLength="1000" Nullable="false" />
+    <Property Name="IDTeacher" Type="int" Nullable="false" />
+    <Property Name="IDDisciplines" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Disciplines_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
+      </Principal>
+      <Dependent Role="Disciplines">
+        <PropertyRef Name="IDTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_WorkPlans">
+    <End Role="WorkPlans" Type="Self.WorkPlans" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkPlans">
+        <PropertyRef Name="IDWorkPlan" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="IDWorkPlan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkPlans_Disciplines">
+    <End Role="Disciplines" Type="Self.Disciplines" Multiplicity="1" />
+    <End Role="WorkPlans" Type="Self.WorkPlans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="IDDisciplines" />
+      </Principal>
+      <Dependent Role="WorkPlans">
+        <PropertyRef Name="IDDisciplines" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkPlans_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="WorkPlans" Type="Self.WorkPlans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
+      </Principal>
+      <Dependent Role="WorkPlans">
+        <PropertyRef Name="IDTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище KBPClassBetaModelContainer">
+    <EntitySet Name="Disciplines" EntityType="Self.Disciplines" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkPlans" EntityType="Self.WorkPlans" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Disciplines_Teachers" Association="Self.FK_Disciplines_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Disciplines" EntitySet="Disciplines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_WorkPlans" Association="Self.FK_Tasks_WorkPlans">
+      <End Role="WorkPlans" EntitySet="WorkPlans" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkPlans_Disciplines" Association="Self.FK_WorkPlans_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="WorkPlans" EntitySet="WorkPlans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkPlans_Teachers" Association="Self.FK_WorkPlans_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="WorkPlans" EntitySet="WorkPlans" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
