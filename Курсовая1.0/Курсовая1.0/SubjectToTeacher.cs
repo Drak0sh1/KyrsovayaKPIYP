@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace Курсовая1._0
 {
-    internal class SubjectToTeacher
+    public class SubjectToTeacher
     {
+        public int id {  get; set; }
         public string Name { get; set; }
-        public int idTeacher {  get; set; }
+        public string idTeacher {  get; set; }
         public int Hour {  get; set; }
+        public SubjectToTeacher (Disciplines disciplines)
+        {
+            this.id = disciplines.IDDisciplines;
+            this.Name = disciplines.Name;
+            this.Hour = disciplines.Hours;
+            this.idTeacher = KBPClassBetaEntities1.GetContext().Teachers.FirstOrDefault(c => c.IDTeacher == disciplines.IDTeacher).Name;
+        }
+
+
     }
 }

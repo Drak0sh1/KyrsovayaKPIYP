@@ -24,11 +24,10 @@
       <PropertyRef Name="IDTask" />
     </Key>
     <Property Name="IDTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
     <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="IssuanceDate" Type="date" Nullable="false" />
     <Property Name="DueDate" Type="date" Nullable="false" />
-    <Property Name="IDWorkPlan" Type="int" Nullable="false" />
+    <Property Name="IDTeacher" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Teachers">
     <Key>
@@ -58,15 +57,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Tasks_WorkPlans">
-    <End Role="WorkPlans" Type="Self.WorkPlans" Multiplicity="1" />
+  <Association Name="FK_Tasks_Teachers">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
     <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="WorkPlans">
-        <PropertyRef Name="IDWorkPlan" />
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
       </Principal>
       <Dependent Role="Tasks">
-        <PropertyRef Name="IDWorkPlan" />
+        <PropertyRef Name="IDTeacher" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -104,8 +103,8 @@
       <End Role="Teachers" EntitySet="Teachers" />
       <End Role="Disciplines" EntitySet="Disciplines" />
     </AssociationSet>
-    <AssociationSet Name="FK_Tasks_WorkPlans" Association="Self.FK_Tasks_WorkPlans">
-      <End Role="WorkPlans" EntitySet="WorkPlans" />
+    <AssociationSet Name="FK_Tasks_Teachers" Association="Self.FK_Tasks_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
       <End Role="Tasks" EntitySet="Tasks" />
     </AssociationSet>
     <AssociationSet Name="FK_WorkPlans_Disciplines" Association="Self.FK_WorkPlans_Disciplines">

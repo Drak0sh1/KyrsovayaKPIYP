@@ -11,7 +11,7 @@
             <TabItem Header="Преподаватели">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Состав Цикловой комисии" HorizontalAlignment="Left" Margin="31,32,0,0" VerticalAlignment="Top" Width="295" FontSize="22"/>
-                    <Button Content="Просмотреть" HorizontalAlignment="Left" Margin="389,41,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="22" Width="267"/>
+                    <Button Name="ViewTeachersBtn" Content="Просмотреть" HorizontalAlignment="Left" Margin="389,41,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="22" Width="267" Click="ViewTeachersBtn_Click"/>
                     <Button Name="TeacherPageBtn" Content="Преподаватели" HorizontalAlignment="Left" Margin="31,92,0,0" VerticalAlignment="Top"  FontFamily="Arial" FontSize="18" Height="30" Width="222" Click="TeacherPageBtn_Click"/>
                     <Button Name="SubjectsBtn" Content="Предметы" HorizontalAlignment="Left" Margin="389,92,0,0" VerticalAlignment="Top" Height="30" Width="175" FontSize="18" FontFamily="Arial" Click="SubjectsBtn_Click"/>
                     <DataGrid Name="TeacherGrid" AutoGenerateColumns="False" Margin="0,152,0,0" BorderBrush="Black">
@@ -26,16 +26,15 @@
             </TabItem>
             <TabItem Header="Задания">
                 <Grid Background="#FFE5E5E5">
-                    <ComboBox Name="TeacherComboBox"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="173" SelectionChanged="TeacherComboBox_SelectionChanged"/>
-                    <DatePicker HorizontalAlignment="Left" Margin="213,10,0,0" VerticalAlignment="Top" Width="133"/>
-                    <DatePicker HorizontalAlignment="Left" Margin="381,10,0,0" VerticalAlignment="Top" Width="133"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="173" Height="319"/>
+                    <ComboBox Name="TeacherComboBox"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="173"/>
+                    <DatePicker Name ="IssuanceDate" HorizontalAlignment="Left" Margin="213,10,0,0" VerticalAlignment="Top" Width="133"/>
+                    <DatePicker Name ="DueDate"  HorizontalAlignment="Left" Margin="381,10,0,0" VerticalAlignment="Top" Width="133"/>
                     <DataGrid Name="TaskGrid" AutoGenerateColumns="False" Margin="213,49,10,0" BorderBrush="Black">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Задание" IsReadOnly="True" Binding="{Binding Task}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Дата выдачи" IsReadOnly="True" Binding="{Binding DateOfIssue}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Срок сдачи" IsReadOnly="True" Binding="{Binding DueDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding nameTeacher}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Задание" IsReadOnly="True" Binding="{Binding descript}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата выдачи" IsReadOnly="True" Binding="{Binding issuence}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Срок сдачи" IsReadOnly="True" Binding="{Binding due}"></DataGridTextColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -52,7 +51,14 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Добавить" HorizontalAlignment="Left" Margin="562,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Width="128"/>
+                    <Button Name="AddTaskBtn" Content="Добавить" HorizontalAlignment="Left" Margin="562,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Width="128" Click="AddTaskBtn_Click"/>
+                    <RichTextBox Name="Descript" Margin="10,49,586,0">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text=""/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Документы">
@@ -70,9 +76,9 @@
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Создание шаблона протакола" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold" FontSize="28"/>
                     <Label Content="Протакол №" HorizontalAlignment="Left" Margin="55,87,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
-                    <TextBox Name="ProtocolNum" HorizontalAlignment="Left" Margin="162,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="39" Height="22" FontSize="16" FontFamily="Arial"/>
+                    <TextBox Name="ProtocolNum" HorizontalAlignment="Left" Margin="162,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="39" Height="22" FontSize="16" FontFamily="Arial"/>
                     <Label Content="дата" HorizontalAlignment="Left" Margin="217,87,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
-                    <TextBox Name="ProtocolDate" HorizontalAlignment="Left" Margin="276,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="100" Height="22" FontSize="16" FontFamily="Arial"/>
+                    <TextBox Name="ProtocolDate" HorizontalAlignment="Left" Margin="276,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="22" FontSize="16" FontFamily="Arial"/>
                     <DatePicker HorizontalAlignment="Left" Margin="57,131,0,0" VerticalAlignment="Top"/>
                     <Button Name="AddProtocolBtn" Content="Создать протакол" HorizontalAlignment="Left" Margin="453,87,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Arial" Width="196" Height="26" Click="AddProtocolBtn_Click"/>
                 </Grid>

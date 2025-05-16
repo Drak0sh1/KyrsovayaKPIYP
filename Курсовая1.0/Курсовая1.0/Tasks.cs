@@ -15,12 +15,11 @@ namespace Курсовая1._0
     public partial class Tasks
     {
         public int IDTask { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
         public System.DateTime IssuanceDate { get; set; }
         public System.DateTime DueDate { get; set; }
-        public int IDWorkPlan { get; set; }
+        public int IDTeacher { get; set; }
     
-        public virtual WorkPlans WorkPlans { get; set; }
+        public virtual Teachers Teachers { get; set; }
     }
 }

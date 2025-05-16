@@ -35,7 +35,10 @@ namespace Курсовая1._0
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             AddTeacherPage addTeacherPage = new AddTeacherPage();
-            addTeacherPage.Show();
+            if (addTeacherPage.ShowDialog() == true)
+            {
+                TeacherGrid.ItemsSource = KBPClassBetaEntities1.GetContext().Teachers.ToList();
+            }
         }
 
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)

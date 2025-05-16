@@ -10,9 +10,9 @@
         <Button Name="ExitBtn" Content="Вернуться на главную страницу" HorizontalAlignment="Left" Margin="630,10,0,0" VerticalAlignment="Top" Click="ExitBtn_Click" Width="246" Height="32"/>
         <DataGrid Name="SubjectGrid" AutoGenerateColumns="False" Margin="0,0,298,28" BorderBrush="Black">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding idTeacher}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название предмета" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Кол-во часов" IsReadOnly="True" Binding="{Binding Hours}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Кол-во часов" IsReadOnly="True" Binding="{Binding Hour}"></DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

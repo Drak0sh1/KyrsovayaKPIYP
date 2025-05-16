@@ -28,6 +28,7 @@ namespace Курсовая1._0
             }
             return context;
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

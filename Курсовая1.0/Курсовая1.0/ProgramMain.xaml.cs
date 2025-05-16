@@ -4,6 +4,12 @@ using Word = Microsoft.Office.Interop.Word;
 
 
 using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Collections.ObjectModel;
 namespace Курсовая1._0
 {
     /// <summary>
@@ -20,10 +26,8 @@ namespace Курсовая1._0
                 var wordApp = new Word.Application();
                 var document = wordApp.Documents.Open(templatePath);
 
-                // Заменяем плейсхолдеры
                 FindAndReplace(wordApp, "{{номер}}", number);
                 FindAndReplace(wordApp, "{{дата}}", date);
-                // Сохраняем в новый файл
                 document.SaveAs2(outputPath);
                 document.Close();
                 wordApp.Quit();
@@ -31,7 +35,7 @@ namespace Курсовая1._0
                 process.StartInfo = new ProcessStartInfo
                 {
                     FileName = outputPath,
-                    UseShellExecute = true // обязательно для открытия в Word
+                    UseShellExecute = true 
                 };
                 process.Start();
             }
@@ -56,7 +60,17 @@ namespace Курсовая1._0
         public ProgramMain()
         {
             InitializeComponent();
+            List<String> teacher = new List<String>();
+            teacher = KBPClassBetaEntities1.GetContext().Teachers.Select(n => n.Name).ToList();
+            taskForTeacher = new ObservableCollection<TaskForTeacher>();
+            var taskLoad = KBPClassBetaEntities1.GetContext().Tasks.ToList();
+            foreach (var d in taskLoad)
+            {
+                taskForTeacher.Add(new TaskForTeacher(d));
+            }
+            TaskGrid.ItemsSource = taskForTeacher;
         }
+        static ObservableCollection<TaskForTeacher> taskForTeacher;
 
         private void TeacherPageBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -71,6 +85,28 @@ namespace Курсовая1._0
             subjectsPage.Show();
             this.Close();
         }
+        private void AddTaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TextRange textRange = new TextRange(Descript.Document.ContentStart, Descript.Document.ContentEnd);
+            string teacher = TeacherComboBox.SelectedItem.ToString();
+            DateTime issuanseD = IssuanceDate.SelectedDate.Value;
+            DateTime dueD = DueDate.SelectedDate.Value;
+            string descr = textRange.Text;
+            Tasks tasks = new Tasks();
+            tasks.Description = descr;
+            tasks.IssuanceDate= issuanseD;
+            tasks.DueDate= dueD;
+            tasks.IDTeacher = KBPClassBetaEntities1.GetContext().Teachers.FirstOrDefault(t => t.Name == teacher).IDTeacher;
+            KBPClassBetaEntities1.GetContext().Tasks.Add(tasks);
+            KBPClassBetaEntities1.GetContext().SaveChanges();
+            taskForTeacher = new ObservableCollection<TaskForTeacher>();
+            var TaskAdd = KBPClassBetaEntities1.GetContext().Tasks.ToList();
+            foreach (var d in TaskAdd)
+            {
+                taskForTeacher.Add(new TaskForTeacher(d));
+            }
+            TaskGrid.ItemsSource = taskForTeacher;
+        }
 
         private void ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -78,11 +114,6 @@ namespace Курсовая1._0
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TeacherComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
@@ -101,5 +132,24 @@ namespace Курсовая1._0
                 date: Udate
             );
         }
+
+        private void ViewTeachersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string filePath = "C:\\Users\\LocalUSer\\Desktop\\Курсовая зачем мне вообще это надо\\Состав ЦК.docx";
+            try
+            {
+                Process.Start(new ProcessStartInfo()
+                {
+                    FileName = filePath,
+                    UseShellExecute = true 
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Не удалось открыть файл: " + ex.Message);
+            }
+        }
+
+        
     }
 }

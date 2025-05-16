@@ -7,13 +7,14 @@
       <Diagram DiagramId="5ae325a2d9c64fd1a82d0356627e0e14" Name="Diagram1">
         <EntityTypeShape EntityType="KBPClassBetaModel.Disciplines" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KBPClassBetaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KBPClassBetaModel.Tasks" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KBPClassBetaModel.Tasks" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="KBPClassBetaModel.Teachers" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="KBPClassBetaModel.WorkPlans" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="KBPClassBetaModel.FK_Disciplines_Teachers" ManuallyRouted="false" />
         <AssociationConnector Association="KBPClassBetaModel.FK_WorkPlans_Disciplines" ManuallyRouted="false" />
-        <AssociationConnector Association="KBPClassBetaModel.FK_Tasks_WorkPlans" ManuallyRouted="false" />
         <AssociationConnector Association="KBPClassBetaModel.FK_WorkPlans_Teachers" ManuallyRouted="false" />
+        <AssociationConnector Association="KBPClassBetaModel.FK_Tasks_Teachers" ManuallyRouted="false" >
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

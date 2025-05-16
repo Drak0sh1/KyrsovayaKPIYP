@@ -19,6 +19,7 @@ namespace Курсовая1._0
         {
             this.Disciplines = new HashSet<Disciplines>();
             this.WorkPlans = new HashSet<WorkPlans>();
+            this.Tasks = new HashSet<Tasks>();
         }
     
         public int IDTeacher { get; set; }
@@ -28,5 +29,7 @@ namespace Курсовая1._0
         public virtual ICollection<Disciplines> Disciplines { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkPlans> WorkPlans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tasks> Tasks { get; set; }
     }
 }

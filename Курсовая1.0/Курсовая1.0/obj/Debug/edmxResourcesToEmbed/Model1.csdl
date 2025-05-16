@@ -26,12 +26,11 @@
       <PropertyRef Name="IDTask" />
     </Key>
     <Property Name="IDTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="IssuanceDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="IDWorkPlan" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="WorkPlans" Relationship="Self.FK_Tasks_WorkPlans" FromRole="Tasks" ToRole="WorkPlans" />
+    <Property Name="IDTeacher" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Teachers" Relationship="KBPClassBetaModel.FK_Tasks_Teachers" FromRole="Tasks" ToRole="Teachers" />
   </EntityType>
   <EntityType Name="Teachers">
     <Key>
@@ -41,6 +40,7 @@
     <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Disciplines" Relationship="Self.FK_Disciplines_Teachers" FromRole="Teachers" ToRole="Disciplines" />
     <NavigationProperty Name="WorkPlans" Relationship="Self.FK_WorkPlans_Teachers" FromRole="Teachers" ToRole="WorkPlans" />
+    <NavigationProperty Name="Tasks" Relationship="KBPClassBetaModel.FK_Tasks_Teachers" FromRole="Teachers" ToRole="Tasks" />
   </EntityType>
   <EntityType Name="WorkPlans">
     <Key>
@@ -51,7 +51,6 @@
     <Property Name="IDTeacher" Type="Int32" Nullable="false" />
     <Property Name="IDDisciplines" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Disciplines" Relationship="Self.FK_WorkPlans_Disciplines" FromRole="WorkPlans" ToRole="Disciplines" />
-    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_WorkPlans" FromRole="WorkPlans" ToRole="Tasks" />
     <NavigationProperty Name="Teachers" Relationship="Self.FK_WorkPlans_Teachers" FromRole="WorkPlans" ToRole="Teachers" />
   </EntityType>
   <Association Name="FK_Disciplines_Teachers">
@@ -75,18 +74,6 @@
       </Principal>
       <Dependent Role="WorkPlans">
         <PropertyRef Name="IDDisciplines" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Tasks_WorkPlans">
-    <End Role="WorkPlans" Type="Self.WorkPlans" Multiplicity="1" />
-    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WorkPlans">
-        <PropertyRef Name="IDWorkPlan" />
-      </Principal>
-      <Dependent Role="Tasks">
-        <PropertyRef Name="IDWorkPlan" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -116,13 +103,25 @@
       <End Role="Disciplines" EntitySet="Disciplines" />
       <End Role="WorkPlans" EntitySet="WorkPlans" />
     </AssociationSet>
-    <AssociationSet Name="FK_Tasks_WorkPlans" Association="Self.FK_Tasks_WorkPlans">
-      <End Role="WorkPlans" EntitySet="WorkPlans" />
-      <End Role="Tasks" EntitySet="Tasks" />
-    </AssociationSet>
     <AssociationSet Name="FK_WorkPlans_Teachers" Association="Self.FK_WorkPlans_Teachers">
       <End Role="Teachers" EntitySet="Teachers" />
       <End Role="WorkPlans" EntitySet="WorkPlans" />
     </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Teachers" Association="KBPClassBetaModel.FK_Tasks_Teachers">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Tasks_Teachers">
+    <End Type="KBPClassBetaModel.Teachers" Role="Teachers" Multiplicity="1" />
+    <End Type="KBPClassBetaModel.Tasks" Role="Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="IDTeacher" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="IDTeacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

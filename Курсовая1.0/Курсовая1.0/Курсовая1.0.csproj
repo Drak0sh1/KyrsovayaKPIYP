@@ -112,6 +112,9 @@
     <Compile Include="Disciplines.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EditSubjectPage.xaml.cs">
+      <DependentUpon>EditSubjectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditTeacherPage.xaml.cs">
       <DependentUpon>EditTeacherPage.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,7 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TaskForTeacher.cs" />
     <Compile Include="Tasks.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSubjectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

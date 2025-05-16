@@ -25,12 +25,11 @@
     <EntitySetMapping Name="Tasks">
       <EntityTypeMapping TypeName="KBPClassBetaModel.Tasks">
         <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="IDTeacher" ColumnName="IDTeacher" />
           <ScalarProperty Name="IDTask" ColumnName="IDTask" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="IssuanceDate" ColumnName="IssuanceDate" />
           <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-          <ScalarProperty Name="IDWorkPlan" ColumnName="IDWorkPlan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

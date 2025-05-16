@@ -14,20 +14,12 @@ namespace Курсовая1._0
     
     public partial class WorkPlans
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WorkPlans()
-        {
-            this.Tasks = new HashSet<Tasks>();
-        }
-    
         public int IDWorkPlan { get; set; }
         public string Descriptions { get; set; }
         public int IDTeacher { get; set; }
         public int IDDisciplines { get; set; }
     
         public virtual Disciplines Disciplines { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tasks> Tasks { get; set; }
         public virtual Teachers Teachers { get; set; }
     }
 }

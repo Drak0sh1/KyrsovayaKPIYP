@@ -49,3 +49,5 @@ C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще эт�
 C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще это надо\Курсовая1.0\Курсовая1.0\obj\Debug\EditTeacherPage.baml
 C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще это надо\Курсовая1.0\Курсовая1.0\obj\Debug\AddSubjectPage.g.cs
 C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще это надо\Курсовая1.0\Курсовая1.0\obj\Debug\AddSubjectPage.baml
+C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще это надо\Курсовая1.0\Курсовая1.0\obj\Debug\EditSubjectPage.g.cs
+C:\Users\LocalUSer\Desktop\Курсовая зачем мне вообще это надо\Курсовая1.0\Курсовая1.0\obj\Debug\EditSubjectPage.baml

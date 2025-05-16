@@ -42,6 +42,7 @@ namespace Курсовая1._0
                 teacher.Name = TeacherName.Text.TrimEnd();
                 KBPClassBetaEntities1.GetContext().Teachers.Add(teacher);
                 KBPClassBetaEntities1.GetContext().SaveChanges();
+                this.DialogResult = true;
                 this.Close();
             }
         }

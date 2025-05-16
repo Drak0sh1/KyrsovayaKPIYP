@@ -58,6 +58,7 @@ namespace Курсовая1._0
                 discipline.Hours = countHour;
                 KBPClassBetaEntities1.GetContext().Disciplines.Add(discipline);
                 KBPClassBetaEntities1.GetContext().SaveChanges();
+                this.DialogResult = true;
                 this.Close();
             }
         }
