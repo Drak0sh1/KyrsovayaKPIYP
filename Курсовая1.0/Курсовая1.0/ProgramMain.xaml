@@ -5,86 +5,285 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая1._0"
         mc:Ignorable="d"
-        Title="ProgramMain" Height="450" Width="800">
+        WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+    Title="ProgramMain" Height="670" Width="1000" >
+
     <Grid Background="#FFA4A4A4">
         <TabControl>
             <TabItem Header="Преподаватели">
-                <Grid Background="#FFE5E5E5">
-                    <Label Content="Состав Цикловой комисии" HorizontalAlignment="Left" Margin="31,32,0,0" VerticalAlignment="Top" Width="295" FontSize="22"/>
-                    <Button Name="ViewTeachersBtn" Content="Просмотреть" HorizontalAlignment="Left" Margin="389,41,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="22" Width="267" Click="ViewTeachersBtn_Click"/>
-                    <Button Name="TeacherPageBtn" Content="Преподаватели" HorizontalAlignment="Left" Margin="31,92,0,0" VerticalAlignment="Top"  FontFamily="Arial" FontSize="18" Height="30" Width="222" Click="TeacherPageBtn_Click"/>
-                    <Button Name="SubjectsBtn" Content="Предметы" HorizontalAlignment="Left" Margin="389,92,0,0" VerticalAlignment="Top" Height="30" Width="175" FontSize="18" FontFamily="Arial" Click="SubjectsBtn_Click"/>
-                    <DataGrid Name="TeacherGrid" AutoGenerateColumns="False" Margin="0,152,0,0" BorderBrush="Black">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Предмет" IsReadOnly="True" Binding="{Binding Subject}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Количество часов" IsReadOnly="True" Binding="{Binding CountOfHours}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Документы" IsReadOnly="True" Binding="{Binding Document}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid Background="#FFF5F5F5">
+                    <Border Background="#FF3F51B5" Height="60" VerticalAlignment="Top">
+                        <TextBlock Text="Состав Цикловой комиссии" 
+                       Foreground="White" 
+                       FontSize="22" 
+                       FontWeight="Bold" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <Grid Margin="20,80,20,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Панель основных кнопок -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                            <Button Name="TeacherPageBtn" Content="Преподаватели" Margin="0,0,15,0" Width="200" Height="35" FontSize="16" Style="{StaticResource ModernButton}" Click="TeacherPageBtn_Click"/>
+                            <Button Name="SubjectsBtn" Content="Предметы" Width="200" Height="35" FontSize="16" Style="{StaticResource ModernButton}" Click="SubjectsBtn_Click"/>
+                            <Button Name="ViewTeachersBtn" Content="Просмотреть состав ЦК"  Margin="15,0,0,0" Width="200" Height="35" FontSize="16" Style="{StaticResource ModernButton}" Click="ViewTeachersBtn_Click"/>
+                        </StackPanel>
+
+                        <!-- Новая панель с элементами фильтрации -->
+                        <Border Grid.Row="1" Background="White"  CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0" Padding="15" Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ComboBox Name="FilterComboBox"  Width="250" Height="35" Margin="0,0,15,0" Style="{StaticResource ModernComboBox}" FontSize="14"/>
+                                <Button Name="ApplyFilterBtn" Content="Применить" Width="120" Height="35" FontSize="16" Style="{StaticResource ModernButton}" Margin="0,0,15,0" Click="ApplyFilterBtn_Click"/>
+                                <Button Name="ResetFilterBtn" Content="Сбросить" Width="120" Height="35" FontSize="16" Style="{StaticResource ModernButton}" Click="ClearFiltersBtn_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Таблица преподавателей -->
+                        <Border Grid.Row="2" Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0">
+                            <DataGrid Name="TeacherGrid" 
+                          AutoGenerateColumns="False" 
+                          HeadersVisibility="Column" 
+                          BorderThickness="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding idTeacher}" Width="*"/>
+                                    <DataGridTextColumn Header="Предмет" IsReadOnly="True" Binding="{Binding Name}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Задания">
+            <TabItem Header="Задания" Height="20" VerticalAlignment="Top">
+                <TabItem.Resources>
+                    <local:DateToBrushConverter x:Key="DateConverter"/>
+                </TabItem.Resources>
+                <Grid Background="#FFF5F5F5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Панель фильтров -->
+                    <Border Grid.Column="0" Grid.RowSpan="2" Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0" Margin="10">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Новое задание" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <ComboBox Name="TeacherComboBox" Style="{StaticResource ModernComboBox}" Margin="0,0,0,15"/>
+                            <TextBlock Text="Описание задания" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBox Grid.Column="0" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" Style="{StaticResource ModernTextBox}" Height="120"/>
+                            <Button Name="AddTaskBtn" Content="Добавить" Style="{StaticResource ModernButton}" Margin="0,15,0,20" Click="AddTaskBtn_Click" Height="21"/>
+
+                            <!-- Добавленные элементы фильтрации -->
+                            <StackPanel Margin="10">
+                                <Separator Margin="0,0,0,10" Background="#FFE0E0E0"/>
+                                <TextBlock Text="Фильтры" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                                <TextBlock Text="Преподаватель" Margin="0,0,0,5"/>
+                                <ComboBox Name="TeacherFilterComboBox" DisplayMemberPath="Name" Style="{StaticResource ModernComboBox}" Margin="0,0,0,15"/>
+                                <TextBlock Text="Срок выдачи" Margin="0,0,0,5"/>
+                                <DatePicker Name="IssuanceDateFromFilter" Margin="0,0,0,5" SelectedDateFormat="Short"/>
+                                <DatePicker Name="IssuanceDateToFilter"  Margin="0,0,0,15" SelectedDateFormat="Short"/>
+                                <TextBlock Text="Срок сдачи" Margin="0,0,0,5"/>
+                                <DatePicker Name="DueDateFromFilter" Margin="0,0,0,5" SelectedDateFormat="Short"/>
+                                <DatePicker Name="DueDateToFilter" Margin="0,0,0,15" SelectedDateFormat="Short"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Name="ApplyFiltrBtn" Content="Применить" 
+                Style="{StaticResource ModernSmallButton}" 
+                Margin="0,0,7,0" Width="70" Click="ApplyFiltrBtn_Click"/>
+                                    <Button x:Name="ResetFltBtn" Content="Сбросить" 
+                Style="{StaticResource ModernSmallButton}" 
+                Margin="0,0,0,0" Width="70" Click="ResetFltBtn_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- Основная панель с таблицей -->
+                    <Border Grid.Column="1" Grid.Row="1" Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0" Margin="0,10,10,10">
+                        <DataGrid Name="TaskGrid" AutoGenerateColumns="False" BorderThickness="0" HeadersVisibility="Column">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding nameTeacher}" Width="*"/>
+                                <DataGridTextColumn Header="Задание" IsReadOnly="True" Binding="{Binding descript}" Width="2*"/>
+                                <DataGridTextColumn Header="Дата выдачи" IsReadOnly="True" Binding="{Binding issuence, StringFormat=\{0:dd.MM.yyyy\}}" Width="80"/>
+                                <DataGridTextColumn Header="Срок сдачи" IsReadOnly="True" Binding="{Binding due, StringFormat=\{0:dd.MM.yyyy\}}" Width="80"/>
+
+                                <DataGridTemplateColumn Width="Auto">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Изменить" 
+                                        Style="{StaticResource ModernSmallButton}"
+                                        Click="ChangeBtn_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="Auto">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Удалить" 
+                                        Style="{StaticResource ModernSmallButton}"
+                                        Click="DeleteBtn_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="{Binding due, Converter={StaticResource DateConverter}}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                    </Border>
+
+                    <!-- Панель фильтров дат -->
+                    <Border Grid.Column="1" Grid.Row="0" Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0" Margin="0,10,10,0" Height="50">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+                            <TextBlock Text="Выдано с:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <DatePicker Name="IssuanceDate" Style="{StaticResource ModernDatePicker}" Width="150" Margin="0,0,15,0"/>
+                            <TextBlock Text="по:" VerticalAlignment="Center" Margin="0,0,30,0"/>
+                            <DatePicker Name="DueDate" Style="{StaticResource ModernDatePicker}" Width="150" Margin="0,0,30,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <!--<TabItem Header="Задания" Height="20" VerticalAlignment="Top">
+                <TabItem.Resources>
+                    <local:DateToBrushConverter x:Key="DateConverter"/>
+                </TabItem.Resources>
                 <Grid Background="#FFE5E5E5">
-                    <ComboBox Name="TeacherComboBox"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="173"/>
-                    <DatePicker Name ="IssuanceDate" HorizontalAlignment="Left" Margin="213,10,0,0" VerticalAlignment="Top" Width="133"/>
-                    <DatePicker Name ="DueDate"  HorizontalAlignment="Left" Margin="381,10,0,0" VerticalAlignment="Top" Width="133"/>
-                    <DataGrid Name="TaskGrid" AutoGenerateColumns="False" Margin="213,49,10,0" BorderBrush="Black">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    --><!-- Остальные элементы остаются без изменений --><!--
+                    <ComboBox Name="TeacherComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="173"/>
+                    <DatePicker Grid.Column="1" Name="IssuanceDate" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="133"/>
+                    <DatePicker Grid.Column="1" Name="DueDate" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="133"/>
+
+                    <DataGrid Grid.Column="1" Grid.Row="1" Name="TaskGrid" AutoGenerateColumns="False" BorderBrush="Black">
+
+
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding nameTeacher}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Задание" IsReadOnly="True" Binding="{Binding descript}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Дата выдачи" IsReadOnly="True" Binding="{Binding issuence}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Срок сдачи" IsReadOnly="True" Binding="{Binding due}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding nameTeacher}"/>
+                            <DataGridTextColumn Header="Задание" IsReadOnly="True" Binding="{Binding descript}"/>
+                            <DataGridTextColumn Header="Дата выдачи" IsReadOnly="True" Binding="{Binding issuence}"/>
+                            <DataGridTextColumn Header="Срок сдачи" IsReadOnly="True" Binding="{Binding due}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Изменить" Click="ChangeBtn_Click"></Button>
+                                        <Button Content="Изменить" Click="ChangeBtn_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Удалить" Click="DeleteBtn_Click"></Button>
+                                        <Button Content="Удалить" Click="DeleteBtn_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="{Binding due, Converter={StaticResource DateConverter}}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
                     </DataGrid>
-                    <Button Name="AddTaskBtn" Content="Добавить" HorizontalAlignment="Left" Margin="562,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Width="128" Click="AddTaskBtn_Click"/>
-                    <RichTextBox Name="Descript" Margin="10,49,586,0">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text=""/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <Button Name="AddTaskBtn" Content="Добавить" Margin="350,10,0,0" Grid.Column="1" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Width="128" Click="AddTaskBtn_Click"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" Width="200" AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox"/>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
+            
             <TabItem Header="Документы">
-                <Grid Background="#FFE5E5E5">
-                    <ComboBox HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="233"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="290,70,0,0" VerticalAlignment="Top" Width="251"/>
-                    <Button Content="Открыть" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" Width="95"/>
-                    <Button Content="Добавить" HorizontalAlignment="Left" Margin="145,22,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" Width="98"/>
-                    <Button Content="Редактировать" HorizontalAlignment="Left" Margin="290,22,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" Width="156"/>
-                    <Button Content="Удалить" HorizontalAlignment="Left" Margin="481,22,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial" Width="126"/>
+                <Grid Background="#FFF5F5F5">
+                    <Border Background="#FF3F51B5" Height="60" VerticalAlignment="Top">
+                        <TextBlock Text="Управление документами" Foreground="White" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Grid Margin="20,80,20,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="15" BorderThickness="1" BorderBrush="#FFE0E0E0">
+                            <StackPanel>
+                                <TextBlock Text="Документы преподавателя" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" Foreground="#FF424242"/>
+                                <ComboBox SelectionChanged="DocChange_Change" Name="TeacherDoc" Margin="0,0,0,15" Height="35" FontSize="14" Padding="5" Style="{StaticResource ModernComboBox}"/>
+                                <TextBlock Text="Доступные документы" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10" Foreground="#FF424242"/>
+                                <ComboBox SelectionChanged="DocChange_Change" Name="Documents" ItemsSource="{Binding MyStringList}" Height="35" FontSize="14" Padding="5" Style="{StaticResource ModernComboBox}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Background="White" CornerRadius="8" Padding="15"
+                BorderThickness="1" BorderBrush="#FFE0E0E0">
+                            <StackPanel>
+                                <TextBlock Text="Дополнительные параметры" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15" Foreground="#FF424242"/>
+                                <ComboBox Name="FileBox" Height="35" FontSize="14" Padding="5" Style="{StaticResource ModernComboBox}"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                                    <Button Name = "Open" Content="Открыть" Margin="0,0,10,0" Width="120" Height="35" FontSize="14" Style="{StaticResource ModernButton}" Click="Open_Click"/>
+                                    <Button Name = "Delete" Content="Удалить"  Width="120" Height="35" FontSize="14" Style="{StaticResource ModernButton}" Click="Delete_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </Grid>
-
             </TabItem>
-            <TabItem Header="Протаколы">
-                <Grid Background="#FFE5E5E5">
-                    <Label Content="Создание шаблона протакола" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold" FontSize="28"/>
-                    <Label Content="Протакол №" HorizontalAlignment="Left" Margin="55,87,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
-                    <TextBox Name="ProtocolNum" HorizontalAlignment="Left" Margin="162,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="39" Height="22" FontSize="16" FontFamily="Arial"/>
-                    <Label Content="дата" HorizontalAlignment="Left" Margin="217,87,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Arial"/>
-                    <TextBox Name="ProtocolDate" HorizontalAlignment="Left" Margin="276,90,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Height="22" FontSize="16" FontFamily="Arial"/>
-                    <DatePicker HorizontalAlignment="Left" Margin="57,131,0,0" VerticalAlignment="Top"/>
-                    <Button Name="AddProtocolBtn" Content="Создать протакол" HorizontalAlignment="Left" Margin="453,87,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Arial" Width="196" Height="26" Click="AddProtocolBtn_Click"/>
+            <TabItem Header="Протоколы" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="73">
+                <Grid Background="#FFF5F5F5">
+                    <Border Background="#FF3F51B5" Height="80" VerticalAlignment="Top" Padding="0,10">
+                        <TextBlock Text="Создание шаблона протокола" Foreground="White" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border Background="White" CornerRadius="8" Margin="20,100,20,20" Padding="25" BorderThickness="1" BorderBrush="#FFE0E0E0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="Основные параметры протокола" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15" Foreground="#FF424242"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="Протокол №" FontSize="16" VerticalAlignment="Center" Foreground="#FF616161"/>
+                                        <TextBox Name="ProtocolNum" Width="50" Height="35" Margin="10,0,0,0" FontSize="16" Padding="5" Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="Дата:" FontSize="16" VerticalAlignment="Center" Foreground="#FF616161"/>
+                                        <TextBox Name="ProtocolDate" Width="120" Height="35" Margin="10,0,0,0" FontSize="16" Padding="5" Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="4" Name="AddProtocolBtn" Content="Создать протокол" HorizontalAlignment="Right" Width="200" Height="40" FontSize="16" Style="{StaticResource ModernButton1}" Click="AddProtocolBtn_Click"/>
+                                </Grid>
+                            </StackPanel>
+                            <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#EEEEEE" Padding="0,15">
+                                <TextBlock Text="Дополнительные параметры (опционально)" FontSize="16" Foreground="#FF757575" Visibility="Collapsed"/>
+                            </Border>
+                        </Grid>
+                    </Border>
                 </Grid>
-
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

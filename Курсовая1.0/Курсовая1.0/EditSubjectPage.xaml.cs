@@ -45,16 +45,23 @@ namespace Курсовая1._0
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string teacherName = Teacher.Text;
-            string subjc = Subject.Text;
-            int hours = Convert.ToInt32(Hours.Text);
-            var disp = KBPClassBetaEntities1.GetContext().Disciplines.FirstOrDefault(c => c.IDDisciplines == d.id);
-            disp.IDTeacher = KBPClassBetaEntities1.GetContext().Teachers.FirstOrDefault(c => c.Name == teacherName).IDTeacher;
-            disp.Name = subjc;
-            disp.Hours = hours;
-            KBPClassBetaEntities1.GetContext().SaveChanges();
-            this.DialogResult = true;
-            this.Close();
+            try
+            {
+                string teacherName = Teacher.Text;
+                string subjc = Subject.Text;
+                int hours = Convert.ToInt32(Hours.Text);
+                var disp = KBPClassBetaEntities1.GetContext().Disciplines.FirstOrDefault(c => c.IDDisciplines == d.id);
+                disp.IDTeacher = KBPClassBetaEntities1.GetContext().Teachers.FirstOrDefault(c => c.Name == teacherName).IDTeacher;
+                disp.Name = subjc;
+                disp.Hours = hours;
+                KBPClassBetaEntities1.GetContext().SaveChanges();
+                this.DialogResult = true;
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Введите коректные данные");
+            }
         }
     }
 }

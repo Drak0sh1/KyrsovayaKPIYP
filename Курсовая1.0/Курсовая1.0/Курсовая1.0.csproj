@@ -109,11 +109,15 @@
     <Compile Include="AddTeacherPage.xaml.cs">
       <DependentUpon>AddTeacherPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DateConverter.cs" />
     <Compile Include="Disciplines.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="EditSubjectPage.xaml.cs">
       <DependentUpon>EditSubjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditTaskPage.xaml.cs">
+      <DependentUpon>EditTaskPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditTeacherPage.xaml.cs">
       <DependentUpon>EditTeacherPage.xaml</DependentUpon>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditSubjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditTaskPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

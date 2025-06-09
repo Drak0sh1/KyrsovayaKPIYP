@@ -24,7 +24,7 @@
       <PropertyRef Name="IDTask" />
     </Key>
     <Property Name="IDTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IssuanceDate" Type="date" Nullable="false" />
     <Property Name="DueDate" Type="date" Nullable="false" />
     <Property Name="IDTeacher" Type="int" Nullable="false" />

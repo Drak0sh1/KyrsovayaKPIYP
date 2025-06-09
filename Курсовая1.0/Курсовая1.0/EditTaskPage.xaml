@@ -1,0 +1,25 @@
+﻿<Window x:Class="Курсовая1._0.EditTaskPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая1._0"
+        mc:Ignorable="d"
+        WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+        Title="EditTaskPage" Height="450" Width="800">
+    <Grid Background="#FFE5E5E5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox Name="TeacherComboBox"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="173"/>
+        <DatePicker Name ="IssuanceDate" HorizontalAlignment="Left" Margin="222,8,0,0" VerticalAlignment="Top" Width="133"/>
+        <DatePicker Grid.Column="1" Name ="DueDate"  HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Width="132"/>
+        <Button Name="AddTaskBtn" Content="Сохранить" Margin="169,8,103,0" Grid.Column="1" VerticalAlignment="Top" FontFamily="Arial" FontSize="18" Width="128" Click="AddTaskBtn_Click"/>
+        <TextBox Grid.Column="0" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" Margin="80,40,80,180" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

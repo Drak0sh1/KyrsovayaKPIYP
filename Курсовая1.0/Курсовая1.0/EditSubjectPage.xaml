@@ -10,9 +10,9 @@
         <ComboBox Name="Teacher" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Width="220" Height="30"/>
         <TextBox Name="Subject" HorizontalAlignment="Center" Margin="0,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="23"/>
         <TextBox Name="Hours" HorizontalAlignment="Center" Margin="0,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="23"/>
-        <Label Content="Введите количество часов " HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Center"/>
+        <Label Content="Введите количество часов " HorizontalAlignment="Left" Margin="140,20,0,0" VerticalAlignment="Center"/>
         <Label Content="Введите название предмета" HorizontalAlignment="Left" Margin="140,149,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label Content="Добавьте предмет" HorizontalAlignment="Left" Margin="172,42,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16" FontWeight="Bold" Width="220"/>
+        <Label Content="Измените предмет" HorizontalAlignment="Left" Margin="172,42,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16" FontWeight="Bold" Width="220"/>
         <Button  Content="Добавить" HorizontalAlignment="Left" Margin="209,281,0,0" VerticalAlignment="Top" Width="90" Height="27" Click="Button_Click"/>
 
 

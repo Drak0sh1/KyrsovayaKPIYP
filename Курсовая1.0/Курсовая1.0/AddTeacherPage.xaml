@@ -5,11 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая1._0"
         mc:Ignorable="d"
-        Title="AddTeacherPage" Height="250" Width="400">
-    <Grid Margin="0,0,0,2">
-        <TextBox Name="TeacherName"  HorizontalAlignment="Center" Margin="0,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="20"/>
-        <Button Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Top" Width="110" Height="24" Margin="0,153,0,0" Click="Button_Click"/>
-        <Label Content="Введите ФИО преподавателя" HorizontalAlignment="Center" Margin="0,34,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16" FontWeight="Bold"/>
+        Title="AddTeacherPage" Height="330" Width="400">
+    <Grid Background="#FFF5F5F5">
+        <Border Background="#FF3F51B5" Height="60" VerticalAlignment="Top">
+            <TextBlock Text="Добавление преподавателя" 
+                   Foreground="White" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"/>
+        </Border>
+        <Grid Margin="20,80,20,20">
+            <Border Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Введите ФИО преподавателя" 
+                           FontFamily="Arial" 
+                           FontSize="16" 
+                           FontWeight="Bold"
+                           Margin="0,0,0,20"
+                           HorizontalAlignment="Center"/>
 
+                    <TextBox Name="TeacherName" 
+                         TextWrapping="Wrap" 
+                         Width="250" 
+                         Height="30"
+                         HorizontalAlignment="Center"
+                         Style="{StaticResource ModernTextBox}"/>
+
+                    <Button Content="Добавить" 
+                        Style="{StaticResource ModernButton}"
+                        Width="150" 
+                        Height="35"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        Click="Button_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

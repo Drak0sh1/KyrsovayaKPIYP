@@ -5,10 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая1._0"
         mc:Ignorable="d"
+        WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FFA4A4A4">
-        <Label Content="Добро пожаловать!" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Unicode MS" FontWeight="Bold"/>
-        <Button x:Name="EnterBtn" Click="EnterBtn_Click" Content="Войти" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="224" FontSize="16" Height="47"/>
-        <PasswordBox Name="PasswordBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="429" Height="37" FontFamily="Arial" FontSize="18"/>
+    <Grid Background="#FFF5F5F5">
+        <!-- Шапка в фирменном стиле -->
+        <Border Background="#FF3F51B5" Height="80" VerticalAlignment="Top">
+            <TextBlock Text="Авторизация в системе" 
+                   Foreground="White" 
+                   FontSize="28"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- Заголовок -->
+            <TextBlock Text="Добро пожаловать!"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   Foreground="#FF212121"
+                   Margin="0,0,0,50"
+                   HorizontalAlignment="Center"/>
+
+            <!-- Поле пароля -->
+            <Border Width="400"
+                Height="50"
+                CornerRadius="4"
+                BorderThickness="1"
+                BorderBrush="#FFE0E0E0"
+                Background="White"
+                Margin="0,0,0,30">
+                <PasswordBox Name="PasswordBox"
+                        FontSize="18"
+                        BorderThickness="0"
+                        VerticalContentAlignment="Center"
+                        Padding="10"/>
+            </Border>
+
+            <!-- Кнопка входа -->
+            <Button x:Name="EnterBtn"
+                Content="Войти"
+                Width="200"
+                Height="45"
+                FontSize="18"
+                Style="{StaticResource ModernButton3}"
+                Click="EnterBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

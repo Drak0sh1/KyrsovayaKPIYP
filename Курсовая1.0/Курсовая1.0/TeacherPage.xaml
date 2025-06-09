@@ -5,29 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая1._0"
         mc:Ignorable="d"
-        Title="TeacherPage" Height="406" Width="637">
-    <Grid Margin="0,0,0,24">
-        <Button Name="ExitBtn" Content="Вернуться на главную страницу" HorizontalAlignment="Left" Margin="380,10,0,0" VerticalAlignment="Top" Click="ExitBtn_Click" Width="246" Height="32"/>
-        <DataGrid Name="TeacherGrid" AutoGenerateColumns="False" Margin="0,0,273,0" BorderBrush="Black">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Редактировать" Click="ChangeBtn_Click"></Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Удалить" Click="DeleteBtn_Click"></Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Name="AddBtn" Content="Добавить" HorizontalAlignment="Left" Margin="380,65,0,0" VerticalAlignment="Top" Width="137" Height="32" Click="AddBtn_Click"/>
+        WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+        Title="TeacherPage" Height="406" Width="701">
+    <Grid Background="#FFF5F5F5">
+        <Border Background="#FF3F51B5" Height="60" VerticalAlignment="Top">
+            <TextBlock Text="Управление преподавателями" 
+                   Foreground="White" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center"/>
+        </Border>
 
+        <!-- Основное содержимое -->
+        <Grid Margin="20,80,20,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Таблица преподавателей -->
+            <Border Grid.Column="0" Background="White" CornerRadius="8" BorderThickness="1" BorderBrush="#FFE0E0E0">
+                <DataGrid Name="TeacherGrid" AutoGenerateColumns="False" HeadersVisibility="Column" BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Преподаватель" IsReadOnly="True" Binding="{Binding Name}" Width="*"/>
+
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Редактировать" 
+                                    Style="{StaticResource ModernSmallButton}"
+                                    Click="ChangeBtn_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Удалить" 
+                                    Style="{StaticResource ModernSmallButton}"
+                                    Click="DeleteBtn_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- Блок кнопок справа -->
+            <StackPanel Grid.Column="1" Margin="20,0,0,0" Width="246">
+                <Button Name="AddBtn" 
+                Content="Добавить" 
+                Style="{StaticResource ModernButton}"
+                Height="35"
+                Click="AddBtn_Click"/>
+
+                <Button Name="ExitBtn" 
+                Content="Вернуться на главную" 
+                Style="{StaticResource ModernButton}"
+                Height="35"
+                Margin="0,20,0,0"
+                Click="ExitBtn_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

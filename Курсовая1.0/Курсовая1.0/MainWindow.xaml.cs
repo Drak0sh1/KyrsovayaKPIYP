@@ -25,11 +25,6 @@ namespace Курсовая1._0
             InitializeComponent();
         }
 
-        //private void LoginBox_Click(object sender, MouseButtonEventArgs e)
-        //{
-        //    LoginBox.Text = "";
-        //}
-
         private void PasswordBox_Click(object sender, MouseButtonEventArgs e)
         {
             PasswordBox.Password = "";

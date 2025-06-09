@@ -6,14 +6,84 @@
         xmlns:local="clr-namespace:Курсовая1._0"
         mc:Ignorable="d"
         Title="AddSubjectPage" Height="450" Width="500">
-    <Grid>
-        <ComboBox Name="Teacher" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Width="220" Height="30"/>
-        <TextBox Name="Subject" HorizontalAlignment="Center" Margin="0,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="23"/>
-        <TextBox Name="Hour" HorizontalAlignment="Center" Margin="0,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="23"/>
-        <Label Content="Введите количество часов " HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Center"/>
-        <Label Content="Введите название предмета" HorizontalAlignment="Left" Margin="140,149,0,0" VerticalAlignment="Top" Height="26"/>
-        <Label Content="Добавьте предмет" HorizontalAlignment="Left" Margin="172,42,0,0" VerticalAlignment="Top" FontFamily="Arial" FontSize="16" FontWeight="Bold" Width="220"/>
-        <Button  Content="Добавить" HorizontalAlignment="Left" Margin="209,281,0,0" VerticalAlignment="Top" Width="90" Height="27" Click="Button_Click"/>
+    <Grid Background="#FFF5F5F5">
+        <!-- Шапка как в первом варианте -->
+        <Border Background="#FF3F51B5" Height="60" VerticalAlignment="Top">
+            <TextBlock Text="Добавление предмета преподавателю" 
+                       Foreground="White" 
+                       FontSize="22" 
+                       FontWeight="Bold" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+        </Border>
 
+        <!-- Основное содержимое -->
+        <Grid Margin="20,80,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Поле выбора преподавателя -->
+            <Label Content="Выберите преподавателя:" 
+                   Grid.Row="0"
+                   HorizontalAlignment="Left" 
+                   Margin="20,0,0,10"
+                   FontSize="14"/>
+
+            <ComboBox Name="Teacher" 
+                      Grid.Row="1"
+                      HorizontalAlignment="Stretch" 
+                      Margin="20,0,20,20"
+                      Height="35"
+                      FontSize="14"
+                      Padding="5"
+                      Style="{StaticResource ModernComboBox2}"/>
+
+            <!-- Поле ввода предмета -->
+            <Label Content="Название предмета:" 
+                   Grid.Row="2"
+                   HorizontalAlignment="Left" 
+                   Margin="20,0,0,10"
+                   FontSize="14"/>
+
+            <TextBox Name="Subject" 
+                     Grid.Row="3"
+                     HorizontalAlignment="Stretch" 
+                     Margin="20,0,20,20"
+                     Height="35"
+                     FontSize="14"
+                     Padding="5"
+                     Style="{StaticResource ModernTextBox2}"/>
+
+            <!-- Поле количества часов -->
+            <Label Content="Количество часов:" 
+                   Grid.Row="3"
+                   HorizontalAlignment="Left" 
+                   Margin="20,45,0,25"
+                   FontSize="14" Grid.RowSpan="2"/>
+
+            <TextBox Name="Hour" 
+                     Grid.Row="4" 
+                     Margin="20,28,20,-8"
+                     Height="35"
+                     FontSize="14"
+                     Padding="5"
+                     Style="{StaticResource ModernTextBox2}"/>
+
+            <!-- Кнопка добавления -->
+            <Button Content="Добавить" 
+                    Grid.Row="4"
+                    HorizontalAlignment="Center" 
+                    Margin="0,82,0,-62"
+                    Width="200" 
+                    Height="35" 
+                    FontSize="16" 
+                    Style="{StaticResource ModernButton2}" 
+                    Click="Button_Click"/>
+        </Grid>
     </Grid>
 </Window>

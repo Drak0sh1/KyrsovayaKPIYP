@@ -34,7 +34,7 @@ namespace Курсовая1._0
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             AddSubjectPage addSubjectPage = new AddSubjectPage();
-            if(addSubjectPage.ShowDialog() == true)
+            if (addSubjectPage.ShowDialog() == true)
             {
                 disciplines = new ObservableCollection<SubjectToTeacher>();
                 var disciplinesDistinct = KBPClassBetaEntities1.GetContext().Disciplines.ToList();
@@ -61,12 +61,11 @@ namespace Курсовая1._0
                 }
                 SubjectGrid.ItemsSource = disciplines;
             }
-
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+
             if (MessageBox.Show($"Вы точно хотите удалить данный предмет?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
